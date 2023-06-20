@@ -2,7 +2,7 @@
 
 function selectManyByName() {
 
-  const searchStrings = ['label', 'labelAppendix']; // Make Change Strings to your need here
+  const searchStrings = ['label', 'labelAppendix']; // Change Strings to your need here
 
   const sel = figma.currentPage.selection;
 
