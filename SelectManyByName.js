@@ -1,8 +1,6 @@
 // Select layers in your selection by multiple names
 
-function selectManyByName() {
-
-  const searchStrings = ['label', 'labelAppendix']; // Change Strings to your need here
+function selectManyByName(searchStrings) {
 
   const sel = figma.currentPage.selection;
 
@@ -19,10 +17,10 @@ function selectManyByName() {
     searchForString(str, sel)
   })
 
-  console.log(myNodes)
+  //console.log(myNodes)
 
   figma.currentPage.selection = myNodes;
 
 }
 
-selectManyByName()
+selectManyByName(['label', 'labelAppendix']) // Change Strings to your need here
