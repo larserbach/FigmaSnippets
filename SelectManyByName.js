@@ -1,26 +1,41 @@
 // Select layers in your selection by multiple names
 
-function selectManyByName(searchStrings) {
+
+
+
+function searchForString(searchTerm, selection, deepSearch ){
+  
+  let matches = []
+
+  selection.forEach( item => {
+    if (item.name.includes(searchTerm)) 
+    {
+      matches.push(item)
+    } else if (deepSearch) {
+      item.findAll(n => n.name.includes(searchTerm)).forEach(match => matches.push(match)) 
+    }
+  })
+  
+  return matches
+  
+}
+
+
+function selectManyByName(searchStrings, deepSearch=true) {
 
   const sel = figma.currentPage.selection;
 
-  var myNodes = [];
-
-  function searchForString(searchTerm, item){
-    item.forEach( i => {
-      const res = i.findAll(n => n.name === searchTerm)
-      res.forEach(r => myNodes.push(r))
-    })
-  }
+  var matches = [];
 
   searchStrings.forEach(str => {
-    searchForString(str, sel)
+    res = searchForString(str, sel, deepSearch)
+    res.forEach(r => matches.push(r))
   })
 
-  //console.log(myNodes)
+  //console.log(matches)
 
-  figma.currentPage.selection = myNodes;
+  figma.currentPage.selection = matches;
 
 }
 
-selectManyByName(['label', 'labelAppendix']) // Change Strings to your need here
+selectManyByName(['State=Rest'], true) // Change Strings to your need here. Set to false if do not want children of your selection
